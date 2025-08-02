@@ -6,7 +6,7 @@ require("dotenv").config({ path: ".env" });
  * @function
  * @global
  */
-require("./seeder.js");
+// require("./seeder.js");
 
 /**
  * import server from "src" file
