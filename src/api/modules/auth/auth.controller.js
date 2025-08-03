@@ -2,18 +2,15 @@
 
 const express = require("express");
 const userServices = require("./../user/user.service");
-const companyServices = require("./../company/company.service");
+
 const {
   createAuthTokenForClient,
   createAuthRefreshTokenForClient,
 } = require("./auth.service");
-const sendMail = require("../../../lib/nodemailer");
+
 
 const {
   ForbiddenException,
-  UnauthorizedException,
-  UnprocessableEntity,
-  ConflictException,
   BadRequestException,
 } = require("../../utils/errorResponse");
 const { checkHashedPassword, hashHandler } = require("../../utils/hashHandler");
