@@ -68,19 +68,6 @@ exports.findOne = async (filter) => {
     { $match: filter },
     {
       $lookup: {
-        from: "companies",
-        localField: "company",
-        foreignField: "_id",
-        as: "company",
-      },
-    },
-    {
-      $addFields: {
-        company: { $first: "$company" },
-      },
-    },
-    {
-      $lookup: {
         from: "provinces",
         localField: "province",
         foreignField: "_id",

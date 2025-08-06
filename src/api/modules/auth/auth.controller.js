@@ -113,19 +113,6 @@ exports.verify = async (req, res) => {
 
   phone = persianToEnglishNumber(phone);
 
-  const str = phone;
-    const lastFiveChars = str.slice(-6); // get last 5 characters
-    // const numbers = Array.from(lastFiveChars).map(char => char.charCodeAt(0));
-    const numbers = Array.from(lastFiveChars).map(char => Number(char));
-    let f = "";
-    for (let i = 0; i < 5; i++) {
-      f = f+(Math.abs(numbers[i]-numbers[i+1]));
-    }
-
-    if(f.startsWith('0')){
-      f = replaceFirstChar(f, '1');
-    }
-
 
   //TODO : change for production
   const isStored =
@@ -142,12 +129,7 @@ exports.verify = async (req, res) => {
 
     const filter = { phone };
     let user = await userServices.findOne(filter);
-    if (!user?._id) {
-      user = await userServices.create({ phone, role: "user" });
-      //below type is company
-      let company = await companyServices.create(user);
-      userServices.update(user._id, { company: company._id });
-    }
+    
     const userAgent = req.get("User-Agent");
     const token = createAuthTokenForClient(user._id, user.role, userAgent);
 
